@@ -1,0 +1,34 @@
+# LEINOS India brand preset for gpt-image-2
+# Loaded by helper scripts when generating LEINOS slides — pass paths into edit.py.
+
+assets:
+  logo: /tmp/leinos_branding/leinos_logo_kurz.png
+  product_665_10l: /Users/zep4ik/Desktop/lime paint 665/665 10l Kalkfarbe Kopie.png
+
+style:
+  voice: "Quiet authority. German precision meets Indian climate sensitivity. Cinematic, mineral, calm."
+  palette: "matte natural white, pit-lime cream, dark slate, signal red (#DC0014) only for the logo"
+  typography: "modern sans-serif, generous white space, 1–3 lines per slide max"
+  do:
+    - cinematic full-bleed photography (real plaster, lime walls, mineral powders, raking daylight)
+    - real product image preserved exactly when shown
+    - logo as small bookmark in top-right corner, not larger than 5% of slide width
+    - clean text composition, perfect typography, no rendered text inside imagery
+  do_not:
+    - generate fake LEINOS logos, tree icons, or secondary brand marks
+    - place product on a white sticker or rectangular cutout — composite cleanly
+    - render any text inside generated photography
+    - bullet-walls, pill containers, gradient noise, stock-photo people
+    - mention deprecated addresses (Aerocity, Worldmark, Coworks, State Bank Colony)
+
+contact_block: |
+  LEINOS ORGANIC PAINTS PVT. LTD.
+  GSTIN: 07AAFCL0615C1Z3
+  Khasra No. 646/1, Road No. Zero, Bakshi Farm Road,
+  Ghitorni, 110030 New Delhi, India
+  Mob: +91 9997897474   Web: www.leinos.in
+
+aspects:
+  desktop: 1536x864       # 16:9 — boardroom / architects / PDF deck
+  mobile: 1080x1920       # 9:16 — Instagram Reels, Stories, WhatsApp
+  square: 1024x1024       # 1:1 — feed posts

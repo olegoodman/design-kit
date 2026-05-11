@@ -157,10 +157,33 @@
 
 ## Tier 4 — Asset Generation
 
-### nano-banana
-**Purpose:** Image generation via Gemini AI. Blog featured images, thumbnails, icons, diagrams, patterns, illustrations, photos.
-**When:** Need to generate any image, visual asset, graphic, or artwork.
-**Required for ALL image generation requests.**
+### gpt-image-2 ⭐ (default for branded / text-heavy / structured images)
+**Purpose:** OpenAI GPT Image 2 — production-grade image model. **99% text-in-image accuracy**, all 8 aspect ratios (incl. 9:16 mobile-first), edit-mode preserves real logos/products across many images.
+**When to prefer over nano-banana:**
+- Rendered text inside the image (slides, banners, infographics, social posts with copy)
+- Brand logo / real product / specific face must stay intact (use `edit.py --refs`)
+- Vertical/landscape format flexibility (Stories, Reels, posters)
+- Dense layouts, multilingual visuals (Hindi/CJK rendered legibly)
+- Marketing assets where precision matters
+**Cost:** Higher per image than Gemini. Use deliberately, not for throwaway generations.
+**Setup:** OpenAI key in `config.yaml` (template: `config.yaml.example`).
+
+### nano-banana (default for free-form / artistic / cheap generations)
+**Purpose:** Image generation via Google Gemini. Cheap, fast, good for free-form aesthetic work.
+**When to prefer over gpt-image-2:**
+- Blog featured images, YouTube thumbnails (no critical in-image text)
+- Illustrations, patterns, decorative artwork, hero photos
+- Throwaway/experimental generations, mood-board exploration
+- High volume where cost matters
+- Tasks where text in the image is decorative, not load-bearing
+**Setup:** Gemini CLI (`gemini auth login`).
+
+### Quick routing rule
+- **Image has text the user reads?** → `gpt-image-2`
+- **Image has a real logo / product / face that must stay accurate?** → `gpt-image-2` (with `--refs`)
+- **Image is vertical (9:16) or non-standard ratio?** → `gpt-image-2`
+- **Pure aesthetic / illustration / mood / blog hero?** → `nano-banana`
+- **High volume / throwaway?** → `nano-banana`
 
 ### product-card-image
 **Purpose:** LEINOS-specific product card composites. 3-step compositing pipeline (ImageMagick + Gemini). 4:3 aspect ratio, 800px WebP.
@@ -169,11 +192,9 @@
 ### banner-design
 **Purpose:** Banners for social media, ads, web, print. 22 art direction styles across all platforms.
 **When:** Facebook/Instagram/LinkedIn/YouTube banners, ad creatives, cover images, web heroes.
-
-### canva
-**Purpose:** Create, edit, export Canva designs via MCP. Social posts, presentations, flyers, posters, business cards.
-**When:** Design work that specifically needs the Canva platform.
+**Engine:** Routes internally to `gpt-image-2` (if text in banner) or `nano-banana` (if purely visual).
 
 ### slides
 **Purpose:** Strategic HTML presentations with Chart.js data visualization, design tokens, responsive layouts.
 **When:** Pitch decks, data presentations, slide decks.
+**Note:** For slides where the slide itself is a generated image (not HTML), use `gpt-image-2 build_deck.py`.

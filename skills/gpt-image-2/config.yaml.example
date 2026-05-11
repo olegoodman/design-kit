@@ -1,0 +1,21 @@
+# GPT Image 2 — API configuration
+#
+# 1. Скопируй этот файл в config.yaml (он в .gitignore, не утечёт).
+# 2. Вставь свой OpenAI ключ ниже.
+# 3. Скилл читает этот файл на каждом вызове — рестарт не нужен.
+
+api:
+  # Endpoint: официальный OpenAI или совместимый прокси
+  # (api.openai.com/v1, openrouter, llm-ai.hopto.org/v1, etc.)
+  endpoint: https://api.openai.com/v1
+  # Твой ключ — sk-...
+  key: sk-REPLACE_ME
+
+# Default model name (some proxies expect a different model id; gpt-image-2 is OpenAI's official id)
+model: gpt-image-2
+
+# Default output settings (CLI flags override these)
+defaults:
+  size: 1536x864       # 16:9 desktop slide
+  quality: high        # low | medium | high
+  format: png          # png | jpeg | webp

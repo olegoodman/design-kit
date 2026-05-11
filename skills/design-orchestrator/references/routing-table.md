@@ -83,10 +83,10 @@ Trigger: "full review", "comprehensive review", "is this good enough?", "ready f
 
 | Asset type | Skill | Trigger phrases |
 |---|---|---|
-| Image (any) | `gpt-image-2` | generate image, thumbnail, icon, diagram, photo (replaces nano-banana) |
+| Image with text / logo / brand | `gpt-image-2` | slide, infographic, social post with copy, branded asset, vertical/9:16, "make a poster with text" |
+| Image, free-form / artistic | `nano-banana` | blog featured image, thumbnail, illustration, pattern, hero photo, mood-board |
 | LEINOS product card | `product-card-image` | product card, packshot, product photo |
-| Banner | `banner-design` | social banner, ad creative, cover image |
-| Canva design | `canva` | canva, poster, flyer, business card |
+| Banner | `banner-design` | social banner, ad creative, cover image (routes internally to gpt-image-2 or nano-banana) |
 | Presentation (premium) | `design-system` | pitch deck, investor deck, strategic presentation, data-heavy slides |
 | Presentation (quick) | `slides` | simple slides, quick presentation, lightweight deck |
 

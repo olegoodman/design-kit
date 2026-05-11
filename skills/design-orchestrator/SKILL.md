@@ -69,7 +69,7 @@ Then immediately invoke the first skill in the route using the **Skill tool**. S
 **Tier 1 — Strategy:** `ui-ux-pro-max`, `creative-director`, `critique`, `audit`
 **Tier 2 — Implementation:** `frontend-design`, `ui-styling`, `brand`, `design`, `design-system`, `teach-impeccable`
 **Tier 3 — Refinement:** `polish`, `typeset`, `arrange`, `colorize`, `bolder`, `quieter`, `animate`, `optimize`, `adapt`, `clarify`, `distill`, `delight`, `harden`, `extract`, `normalize`, `onboard`, `overdrive`
-**Tier 4 — Assets:** `nano-banana`, `product-card-image`, `banner-design`, `canva`, `slides`
+**Tier 4 — Assets:** `gpt-image-2` (default for text/logo/branded), `nano-banana` (default for free-form/artistic), `product-card-image`, `banner-design`, `slides`
 
 Full catalog with descriptions: `[[references/skill-catalog.md]]`
 

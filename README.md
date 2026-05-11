@@ -2,7 +2,7 @@
 
 Полный набор скиллов для дизайна сайтов, лендингов, дашбордов, презентаций и брендинга. Всё устанавливается одной командой и сразу подключается в Claude Code.
 
-В наборе **33 скилла**, организованных в 4 уровня:
+В наборе **33 скилла**, организованных в 4 уровня (Tier 4 поменялся в v1.1.0 — добавлен `gpt-image-2`, убран `canva`):
 
 - **Tier 1 (Стратегия)** — что делать: оценка качества, выбор направления, креативные концепты.
 - **Tier 2 (Имплементация)** — как делать: код для компонентов, дизайн-токены, бренд-айдентика.
@@ -94,42 +94,76 @@ cp -R ~/path/to/design-kit/skills/* ~/.claude/skills/
 
 | Скилл | Что делает | Setup |
 |---|---|---|
-| **nano-banana** | Генерация любых изображений через **Gemini AI**. Картинки для блога, превью YouTube, иконки, диаграммы, паттерны, иллюстрации. | ⚠️ **Gemini CLI** — см. ниже |
+| **gpt-image-2** ⭐ | OpenAI GPT Image 2. **99% точность текста в картинке**, все 8 aspect ratios (включая 9:16 mobile-first), edit-mode сохраняет логотипы/продукты. Default для брендированных/текстовых ассетов. | ⚠️ **OpenAI API key** — см. ниже |
+| **nano-banana** | Генерация через **Google Gemini**. Дешевле и быстрее, но текст в картинке хуже. Default для блог-обложек, иллюстраций, паттернов, mood-board. | ⚠️ **Gemini CLI** — см. ниже |
 | **product-card-image** | LEINOS-специфичные карточки товаров. 3-step pipeline (ImageMagick + Gemini), 4:3, 800px WebP. | ⚠️ **ImageMagick** + **Gemini CLI**. Только для LEINOS — можно удалить, если не нужно |
-| **banner-design** | Баннеры для соцсетей, рекламы, веба, печати. 22 стиля. | ⚠️ Использует **Gemini** внутри (через nano-banana) |
-| **canva** | Создание, редактирование, экспорт дизайнов через **Canva**. | ⚠️ **Canva MCP** — см. ниже |
+| **banner-design** | Баннеры для соцсетей, рекламы, веба, печати. 22 стиля. Внутри сама роутится: текст → gpt-image-2, чистая картинка → nano-banana. | ⚠️ **OpenAI** и/или **Gemini** |
 | **slides** | Стратегические HTML-презентации с Chart.js, дизайн-токенами, респонсив-лейаутом. | Ничего не нужно |
+
+#### Как оркестратор выбирает между `gpt-image-2` и `nano-banana`
+
+| Задача | Скилл | Почему |
+|---|---|---|
+| Слайд / инфографика / соц-пост с текстом | `gpt-image-2` | Текст рендерится без артефактов (99% accuracy) |
+| Баннер с надписью «Скидка 30%» | `gpt-image-2` | То же — текст читаемый |
+| Изображение, где должен быть **наш логотип** или **наш продукт** | `gpt-image-2` с `--refs` | Edit-mode сохраняет референсы across много генераций |
+| Вертикальный формат 9:16 (Reels, Stories) | `gpt-image-2` | Поддерживает все 8 aspect ratios нативно |
+| Блог-обложка, YouTube thumbnail (без критичного текста) | `nano-banana` | Дешевле, быстрее, картинка важнее текста |
+| Иллюстрация, паттерн, mood-board, hero-photo | `nano-banana` | Свободная стилистика, low-stakes |
+| Много вариантов «накидать идей» | `nano-banana` | Volume + cost |
+
+Просто говори задачу — оркестратор сам выберет правильный движок. Если хочешь явно — упомяни имя скилла.
 
 ---
 
 ## Setup: что и куда
 
-Ниже — что именно нужно завести **только для скиллов Tier 4 и `design` из Tier 2**. Всё остальное работает из коробки.
+Ниже — что нужно завести **только для Tier 4 и `design` из Tier 2**. Всё остальное работает из коробки.
 
-### 1. Gemini CLI (для `design`, `nano-banana`, `product-card-image`, `banner-design`)
+### 1. OpenAI API key (для `gpt-image-2`, частично `banner-design`)
 
-Это бесплатный CLI от Google для работы с Gemini-моделями (генерация изображений).
+GPT Image 2 — платный API от OpenAI. Один генерируемый слайд high quality ≈ $0.03-0.10.
+
+**Шаги:**
+1. Завести ключ на [platform.openai.com/api-keys](https://platform.openai.com/api-keys) (нужен оплаченный баланс).
+2. Скопировать template в реальный конфиг:
+   ```bash
+   cp ~/.claude/plugins/cache/<...>/design-kit/skills/gpt-image-2/config.yaml.example \
+      ~/.claude/plugins/cache/<...>/design-kit/skills/gpt-image-2/config.yaml
+   ```
+   (точный путь зависит от того, как ты ставил плагин; ищи `gpt-image-2/config.yaml.example`)
+3. Открыть `config.yaml`, заменить `sk-REPLACE_ME` на свой ключ.
+4. Проверить: `python3 ~/.../gpt-image-2/scripts/_client.py` — должно сказать «✅ API доступно».
+
+**Альтернатива — прокси.** Если хочешь использовать прокси (OpenRouter, hopto-прокси, etc.), поменяй `endpoint` в `config.yaml` на нужный URL.
+
+Если не хочешь возиться с OpenAI — **просто удали скилл**:
+```bash
+rm -rf ~/.claude/skills/gpt-image-2
+```
+Тогда оркестратор автоматически будет роутить все картинки на `nano-banana`.
+
+### 2. Gemini CLI (для `design`, `nano-banana`, `product-card-image`, `banner-design`)
+
+Бесплатный CLI от Google для генерации картинок через Gemini.
 
 ```bash
-# установка (если ещё нет)
+# установка
 npm install -g @google/gemini-cli
 
 # аутентификация — откроет браузер
 gemini auth login
-```
 
-Проверка:
-```bash
+# проверка
 gemini --version
 ```
 
-Если не хочешь возиться с Gemini — **просто удали эти скиллы**:
+Если не хочешь Gemini — удали:
 ```bash
 rm -rf ~/.claude/skills/{nano-banana,banner-design,product-card-image,design}
 ```
-Остальной набор продолжит работать.
 
-### 2. ImageMagick (только для `product-card-image`)
+### 3. ImageMagick (только для `product-card-image`)
 
 ```bash
 # macOS
@@ -137,13 +171,6 @@ brew install imagemagick
 
 # Linux
 sudo apt install imagemagick
-```
-
-### 3. Canva MCP (только для `canva`)
-
-Canva MCP подключается через настройки Claude Code → MCP servers. Подробности и токен авторизации — на [canva.dev/docs](https://www.canva.dev/docs/connect/). Если Canva не нужна:
-```bash
-rm -rf ~/.claude/skills/canva
 ```
 
 ### 4. shadcn MCP (опционально, для `ui-styling`)
@@ -154,7 +181,7 @@ rm -rf ~/.claude/skills/canva
 
 ## Что НЕ требует никакого setup'а (большая часть)
 
-Из 33 скиллов **27 работают сразу** без единой настройки:
+Из 33 скиллов **28 работают сразу** без единой настройки:
 
 ```
 design-orchestrator, ui-ux-pro-max, creative-director, critique, audit,
@@ -164,10 +191,21 @@ optimize, adapt, clarify, distill, delight, harden, extract,
 normalize, onboard, overdrive, slides
 ```
 
-Если ты хочешь **минимальный набор без внешних зависимостей** — удали 5 скиллов и забудь про ключи:
+Если хочешь **минимальный набор без ключей** — удали 5 скиллов и забудь про setup:
 ```bash
 cd ~/.claude/skills/
-rm -rf design nano-banana product-card-image banner-design canva
+rm -rf gpt-image-2 nano-banana banner-design product-card-image design
+```
+
+Или **только OpenAI без Gemini** (если ОК с тем, что блог-обложек не будет, зато слайды/баннеры с текстом работают):
+```bash
+rm -rf ~/.claude/skills/{nano-banana,product-card-image,design}
+# оставляем gpt-image-2 и banner-design (он сам обойдётся без gemini)
+```
+
+Или **только Gemini без OpenAI** (как было в v1.0.0):
+```bash
+rm -rf ~/.claude/skills/gpt-image-2
 ```
 
 ---
@@ -186,7 +224,13 @@ rm -rf design nano-banana product-card-image banner-design canva
    → orchestrator выберет: critique + audit + adapt
 
 «Сгенерируй баннер для Instagram про скидку 30%»
-   → orchestrator выберет: banner-design
+   → orchestrator выберет: banner-design → gpt-image-2 (текст «-30%» должен быть читаемым)
+
+«Сделай обложку для блога про дизайн-системы»
+   → orchestrator выберет: nano-banana (картинка без критичного текста, дешевле)
+
+«Сделай 8 слайдов про наш продукт с нашим логотипом»
+   → orchestrator выберет: gpt-image-2 build_deck.py с --refs логотипа
 
 «Создай дизайн-систему с нуля»
    → orchestrator выберет: brand-setup → design-system → ui-styling
@@ -241,7 +285,7 @@ rm -rf design-orchestrator ui-ux-pro-max creative-director critique audit \
        frontend-design ui-styling brand-setup brand design design-system \
        polish typeset arrange colorize bolder quieter animate optimize \
        adapt clarify distill delight harden extract normalize onboard \
-       overdrive nano-banana product-card-image banner-design canva slides
+       overdrive gpt-image-2 nano-banana product-card-image banner-design slides
 ```
 
 ---
@@ -253,6 +297,14 @@ rm -rf design-orchestrator ui-ux-pro-max creative-director critique audit \
 
 **Q: `design` или `nano-banana` ругаются на Gemini.**
 Запусти `gemini auth login` ещё раз. Если не помогло — `gemini --version` должна выдавать версию; если нет — переустанови CLI.
+
+**Q: `gpt-image-2` пишет «⚠️ Обнови API» / 401 / 429.**
+Открой `gpt-image-2/config.yaml` и проверь:
+- Поле `key:` — там настоящий `sk-...`, а не `sk-REPLACE_ME`
+- Баланс на [platform.openai.com/usage](https://platform.openai.com/usage) — если 0, GPT Image 2 не будет работать
+- `endpoint:` — официальный `https://api.openai.com/v1` или твой прокси
+
+Скилл читает `config.yaml` на каждом вызове, рестарт Claude Code не нужен.
 
 **Q: Скилл вообще не запускается, хотя должен.**
 Открой `~/.claude/skills/<имя>/SKILL.md`, проверь поле `description:` — оно должно содержать триггеры под твою задачу. Иногда фразу нужно переформулировать, чтобы Claude её подцепил.
@@ -279,6 +331,7 @@ rm -rf design-orchestrator ui-ux-pro-max creative-director critique audit \
 
 ## Версии и автор
 
-- **v1.0.0** — первая сборка, 33 скилла.
-- Автор: Oleg (передано сыну, май 2026).
+- **v1.1.0** (май 2026) — убран `canva` (отказались от подписки); добавлен `gpt-image-2` (OpenAI flagship image model); routing-table перенастроена: gpt-image-2 ↔ nano-banana по правилам «текст в картинке / референсы / vertical → gpt-image-2, всё остальное → nano-banana».
+- **v1.0.0** (май 2026) — первая сборка, 33 скилла.
+- Автор: Oleg.
 - Лицензия: используй как хочешь, без гарантий.

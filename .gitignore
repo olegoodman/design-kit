@@ -7,3 +7,9 @@ node_modules/
 *.log
 .vscode/
 .idea/
+
+# gpt-image-2 — реальный конфиг с ключом не коммитим
+skills/gpt-image-2/config.yaml
+skills/gpt-image-2/output/*.png
+skills/gpt-image-2/output/*.jpg
+skills/gpt-image-2/output/*.webp

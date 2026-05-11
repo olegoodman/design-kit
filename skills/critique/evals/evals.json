@@ -1,0 +1,20 @@
+{
+  "skill_name": "critique",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Оцени hero секцию на главной странице leinos-web. Что-то с ней не так, но я не могу понять что именно",
+      "expected_output": "Structured UX critique with 3-persona observations, 6-dimension scores, issues with severity and fix_skill mapping, verdict NEEDS_REVISION or APPROVED"
+    },
+    {
+      "id": 2,
+      "prompt": "Сделай лучше секцию portfolio на сайте",
+      "expected_output": "Orchestrator routes to critique first (vague request), critique diagnoses specific UX issues, then routes to appropriate Tier 3 skills"
+    },
+    {
+      "id": 3,
+      "prompt": "Перед тем как мы начнём строить новую секцию отзывов, оцени текущий дизайн окружающих секций",
+      "expected_output": "Critique evaluates surrounding context for NEW_SECTION route, provides scores and design direction context for frontend-design"
+    }
+  ]
+}

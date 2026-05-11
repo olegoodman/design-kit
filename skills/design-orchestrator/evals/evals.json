@@ -1,0 +1,35 @@
+{
+  "skill": "design-orchestrator",
+  "queries": [
+    {
+      "prompt": "Hero секция выглядит скучно, хочу чтобы было более впечатляюще и профессионально. Может поменять шрифты и добавить анимацию на scroll",
+      "should_trigger": true,
+      "notes": "Vague improvement + specific aspects (fonts, animation). Should route to critique then typeset + animate"
+    },
+    {
+      "prompt": "Need to build a new 'Why Choose LEINOS' section with product benefits, German quality badges, and customer testimonials. Make it visually stunning.",
+      "should_trigger": true,
+      "notes": "NEW_SECTION — should route to critique → frontend-design → polish"
+    },
+    {
+      "prompt": "Карточки продуктов слишком серые и однообразные, нужно больше цвета и визуальной иерархии между категориями",
+      "should_trigger": true,
+      "notes": "POINT_FIX: color + layout. Should route to colorize + arrange"
+    },
+    {
+      "prompt": "Fix the TypeScript error in ProductCard.tsx — 'productId' is possibly undefined, need to add a null check before the filter call on line 47",
+      "should_trigger": false,
+      "notes": "Pure TypeScript fix, no visual changes"
+    },
+    {
+      "prompt": "Add 3 new products to data.ts: LEINOS 636 Hardwax Oil, LEINOS 637 Furniture Oil, LEINOS 638 Floor Wax. Copy the structure from existing products",
+      "should_trigger": false,
+      "notes": "Content-only data change, no visual modifications"
+    },
+    {
+      "prompt": "The Solutions page router is broken — clicking 'Interior Wood' routes to /solutions/undefined instead of /solutions/interior-wood. Fix the route params in AppRouter.tsx",
+      "should_trigger": false,
+      "notes": "Routing logic bug, not visual work"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "design-kit",
+  "version": "1.0.0",
+  "description": "Полный набор скиллов для дизайна сайтов: оркестратор + 32 специализированных скилла (стратегия, имплементация, шлифовка, генерация ассетов).",
+  "author": {
+    "name": "Oleg"
+  },
+  "homepage": "https://github.com/olegoodman/design-kit",
+  "keywords": [
+    "design",
+    "ui",
+    "ux",
+    "frontend",
+    "tailwind",
+    "shadcn",
+    "branding",
+    "creative-director"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "design-kit-marketplace",
+  "owner": {
+    "name": "Oleg"
+  },
+  "plugins": [
+    {
+      "name": "design-kit",
+      "source": "./",
+      "description": "Полный дизайн-набор для Claude Code: оркестратор + 32 скилла.",
+      "version": "1.0.0"
+    }
+  ]
+}

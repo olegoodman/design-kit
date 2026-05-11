@@ -1,0 +1,20 @@
+{
+  "skill_name": "polish",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Секция готова, но что-то не доведено до конца. Отполируй перед шипом",
+      "expected_output": "Checklist run, direct code fixes applied via Edit tool, polish report table showing before/after for each fix, no design decisions changed"
+    },
+    {
+      "id": 2,
+      "prompt": "Мы закончили hero секцию после critique → frontend-design. Финальный проход",
+      "expected_output": "Polish as last step in chain, fixes micro-details only, outputs report with count of fixes and before/after diff"
+    },
+    {
+      "id": 3,
+      "prompt": "Подчисти эту карточку продукта — hover states, transitions, мелочи",
+      "expected_output": "Focused polish on interactive states and visual consistency, applies fixes directly, reports what was changed"
+    }
+  ]
+}

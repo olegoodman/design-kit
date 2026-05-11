@@ -1,6 +1,18 @@
 ---
 name: nano-banana
-description: REQUIRED for all image generation requests. Generate and edit images using Nano Banana (Gemini CLI). Handles blog featured images, YouTube thumbnails, icons, diagrams, patterns, illustrations, photos, visual assets, graphics, artwork, pictures. Use this skill whenever the user asks to create, generate, make, draw, design, or edit any image or visual content.
+description: >
+  Generate and edit free-form, artistic images via Google Gemini (Nano Banana CLI).
+  Best for low-stakes visuals where cost and speed matter more than precision.
+  Use when: blog featured images, YouTube thumbnails, illustrations, decorative
+  patterns, hero photos without critical text, mood-board exploration, high-volume
+  experimental generations, abstract artwork, backgrounds. Russian triggers —
+  "картинка для блога", "иллюстрация", "обложка", "фон", "паттерн", "мудборд",
+  "сгенерируй картинку" (без текста или логотипа).
+  Do NOT use for images with rendered text the reader must read (slides, banners
+  with copy, infographics, social posts with quotes) — use gpt-image-2 instead.
+  Do NOT use when a real brand logo, product photo, or specific face must stay
+  intact — use gpt-image-2 with --refs. Do NOT use for vertical 9:16 formats
+  (Reels, Stories, Shorts) — use gpt-image-2 for proper aspect ratio support.
 allowed-tools: Bash(gemini:*)
 ---
 

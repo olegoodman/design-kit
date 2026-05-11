@@ -331,6 +331,7 @@ rm -rf design-orchestrator ui-ux-pro-max creative-director critique audit \
 
 ## Версии и автор
 
+- **v1.1.1** (май 2026) — `nano-banana` description перенастроен: убран overtrigger «REQUIRED for all image generation» (конфликтовал с routing rule), добавлены явные negative triggers с deferral на `gpt-image-2` (текст в картинке / brand-логотип / vertical 9:16). Без этого фикса nano-banana перехватывал задачи раньше, чем оркестратор успевал переадресовать.
 - **v1.1.0** (май 2026) — убран `canva` (отказались от подписки); добавлен `gpt-image-2` (OpenAI flagship image model); routing-table перенастроена: gpt-image-2 ↔ nano-banana по правилам «текст в картинке / референсы / vertical → gpt-image-2, всё остальное → nano-banana».
 - **v1.0.0** (май 2026) — первая сборка, 33 скилла.
 - Автор: Oleg.

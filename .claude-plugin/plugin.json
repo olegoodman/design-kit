@@ -1,7 +1,7 @@
 {
   "name": "design-kit",
-  "version": "1.1.0",
-  "description": "Полный набор скиллов для дизайна сайтов: оркестратор + 32 специализированных скилла (стратегия, имплементация, шлифовка, генерация ассетов). v1.1 — добавлен gpt-image-2, убран canva.",
+  "version": "1.1.1",
+  "description": "Полный набор скиллов для дизайна сайтов: оркестратор + 32 специализированных скилла (стратегия, имплементация, шлифовка, генерация ассетов). v1.1 — gpt-image-2 in, canva out. v1.1.1 — nano-banana description: убран overtrigger 'REQUIRED for all images', добавлены явные negative triggers с deferral на gpt-image-2.",
   "author": {
     "name": "Oleg"
   },

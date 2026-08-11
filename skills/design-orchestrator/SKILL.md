@@ -38,7 +38,7 @@ Load `[[references/routing-table.md]]` and find the matching route.
 
 Before invoking Tier 2/3 skills:
 
-1. **`.impeccable.md` exists?** If no and project needs one → invoke `teach-impeccable` first
+1. **Design context loaded?** Read the project's `DESIGN.md` (tokens, style direction, rationale) if it exists; fall back to `PRODUCT.md` / project CLAUDE.md design section. No design context at all → note it and infer direction from the brief per `taste-skill`'s Design Read.
 2. **Brand context loaded?** If `brand` skill available, run `inject-brand-context.cjs` for palette, fonts, tokens. Otherwise read project's design tokens manually
 3. **Clean base?** For NEW_SECTION, verify starting from correct branch state (not rejected work)
 
@@ -63,13 +63,16 @@ Then immediately invoke the first skill in the route using the **Skill tool**. S
 - **Creative brief for new section** (campaign, landing page, brand hero) → `creative-director` first for concept, then build.
 - **NEW_SECTION** → always end route with `polish` as final pass.
 - **Multiple aspects** → chain skills (e.g., `typeset` then `colorize` then `polish`).
+- **Visual gate (mandatory for NEW_SECTION and IMPROVE):** after the code is written, render the affected page via Playwright MCP, take screenshots at 390 / 768 / 1440 px, compare against intent, fix, re-screenshot. Do not report the route complete until the visual check passes.
+- **Name-only skills:** most Tier-3 skills are listed without descriptions (settings `skillOverrides: name-only`) to keep the skill listing lean. They are still fully invocable — call them by exact name via the Skill tool as this table directs.
 
 ## Skill Tiers (summary)
 
 **Tier 1 — Strategy:** `ui-ux-pro-max`, `creative-director`, `critique`, `audit`
-**Tier 2 — Implementation:** `frontend-design`, `ui-styling`, `brand`, `design`, `design-system`, `teach-impeccable`
-**Tier 3 — Refinement:** `polish`, `typeset`, `arrange`, `colorize`, `bolder`, `quieter`, `animate`, `optimize`, `adapt`, `clarify`, `distill`, `delight`, `harden`, `extract`, `normalize`, `onboard`, `overdrive`
-**Tier 4 — Assets:** `gpt-image-2` (default for text/logo/branded), `nano-banana` (default for free-form/artistic), `product-card-image`, `banner-design`, `slides`
+**Tier 2 — Implementation:** `taste-skill` (base for landing pages / portfolios / redesigns — anti-slop rules, Design Read, variance/motion/density dials), `ui-styling` (shadcn/Tailwind components), `frontend-design` (one-off HTML artifacts, posters, experiments), `brand`, `design`, `design-system`
+**Tier 3 — Refinement:** `polish`, `typeset`, `arrange`, `colorize`, `bolder`, `quieter`, `optimize`, `adapt`, `clarify`, `distill`, `delight`, `harden`, `extract`, `normalize`, `onboard`
+**Motion:** `emil-design-eng` (animation decisions: whether/why/easing/duration), `review-animations` (strict animation code review, explicit invoke only), `apple-design` (gesture-driven / spring / Apple-style motion), `animation-vocabulary` (naming effects)
+**Tier 4 — Assets:** `gpt-image-2` (default for text/logo/branded, incl. banners and ad creatives), `nano-banana` (default for free-form/artistic), `product-card-image`, `slides`
 
 Full catalog with descriptions: `[[references/skill-catalog.md]]`
 

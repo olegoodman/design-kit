@@ -121,3 +121,15 @@ If you found issues beyond polish scope, note them at the bottom:
 - Redesign visual hierarchy (that's `critique` → fix skills)
 
 **If you find bigger problems:** Note them in "Beyond Polish Scope" but don't fix them. Polish is the finisher, not the architect.
+
+## Visual Gate (mandatory before declaring polish complete)
+
+You cannot see your output from code alone. Before reporting done:
+
+1. Render the affected page (dev server + Playwright MCP: `browser_navigate` → `browser_take_screenshot`).
+2. Screenshot at three widths: **390px, 768px, 1440px** (`browser_resize` between shots).
+3. Compare each screenshot against the intent: alignment, spacing, states, overflow, nothing broken at any breakpoint.
+4. Found an issue → fix → re-screenshot. Repeat until all three pass.
+5. Only then output the polish report. Include the screenshots' verdict per breakpoint in the report.
+
+If the page cannot be rendered (no dev server, non-web target), state this explicitly in the report instead of silently skipping the gate.

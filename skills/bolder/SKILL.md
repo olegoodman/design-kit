@@ -102,5 +102,5 @@ Flat section → bold section:
 - Don't compromise readability or usability for boldness
 - Don't tone down — that's `quieter`
 - Don't add layout structure — that's `arrange`
-- Don't add animations — that's `animate`
+- Don't add animations — that's `emil-design-eng`
 - If the design needs a complete creative rethink, suggest `creative-director`

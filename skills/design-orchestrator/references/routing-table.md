@@ -1,13 +1,17 @@
 # Routing Table
 
+> Base implementation skill is `taste-skill` (landing pages, marketing sections, portfolios, redesigns). `frontend-design` is reserved for one-off HTML artifacts / posters / visual experiments outside the product codebase. Never run both on the same task — one base skill per task.
+> Every NEW_SECTION / IMPROVE route ends with the **visual gate**: render via Playwright MCP, screenshot at 390 / 768 / 1440 px, compare, fix, re-screenshot until pass.
+
 ## NEW_SECTION — building from scratch
 
 ### Standard (no creative brief)
 | Step | Skill | Why |
 |---|---|---|
 | 1 | `critique` | Assess surrounding context, existing design direction |
-| 2 | `frontend-design` | Build with bold, distinctive visual code |
+| 2 | `taste-skill` | Build: Design Read → dials → anti-slop rules → code |
 | 3 | `polish` | Final refinement pass |
+| 4 | Visual gate | Playwright screenshots 390/768/1440 → compare → fix |
 
 ### With creative brief (campaign, landing page, brand hero)
 Trigger: user provides a brief, mentions campaign, "Big Idea", brand launch, or the section needs a creative concept — not just visual execution.
@@ -15,9 +19,16 @@ Trigger: user provides a brief, mentions campaign, "Big Idea", brand launch, or 
 | Step | Skill | Why |
 |---|---|---|
 | 1 | `creative-director` | Generate concept: insight → ideation → evaluate (full cycle or Phase 2-3) |
-| 2 | `frontend-design` | Build the concept into visual code |
+| 2 | `taste-skill` | Build the concept into visual code |
 | 3 | `critique` | Evaluate UX quality of the result |
 | 4 | `polish` | Final refinement pass |
+| 5 | Visual gate | Playwright screenshots 390/768/1440 → compare → fix |
+
+### One-off artifact (poster, single HTML page, visual experiment — not part of a product codebase)
+| Step | Skill | Why |
+|---|---|---|
+| 1 | `frontend-design` | Bold one-off visual code, wow-factor first |
+| 2 | `polish` | Final refinement pass |
 
 ## IMPROVE — making existing design better
 
@@ -47,7 +58,9 @@ Trigger: user provides a brief, mentions campaign, "Big Idea", brand launch, or 
 | Typography | `typeset` | fonts, text hierarchy, readability, sizing, weight |
 | Color | `colorize` | palette, monochromatic, dull, needs warmth, gray |
 | Layout | `arrange` | spacing, visual rhythm, grid, crowded, alignment |
-| Animation | `animate` → `optimize` | transitions, hover, scroll effects, motion, micro-interactions |
+| Animation | `emil-design-eng` | transitions, hover, scroll effects, motion, micro-interactions — decides whether/why/easing/duration first |
+| Animation review | `review-animations` | review existing animation code against a strict craft bar |
+| Apple-style motion | `apple-design` | gestures, springs, drag/swipe/sheets, interruptible transitions, translucent depth |
 | Too bland | `bolder` | generic, safe, boring, lacks personality, flat |
 | Too loud | `quieter` | aggressive, overwhelming, garish, too bold |
 | Responsive | `adapt` | mobile, breakpoints, viewport, touch targets |
@@ -58,7 +71,6 @@ Trigger: user provides a brief, mentions campaign, "Big Idea", brand launch, or 
 | Components | `extract` | repeated patterns, component library, reuse |
 | Consistency | `normalize` | design drift, mismatched styles, tokens |
 | Onboarding | `onboard` | first-run, empty states, activation flow |
-| Ambitious effects | `overdrive` | shaders, spring physics, scroll-driven, 60fps |
 | Performance | `optimize` | slow, laggy, janky, bundle size, loading |
 
 ## REVIEW — evaluate current state
@@ -68,6 +80,8 @@ Trigger: user provides a brief, mentions campaign, "Big Idea", brand launch, or 
 |---|---|---|
 | 1 | `critique` | UX evaluation with quantitative scoring |
 | 2 | `audit` | Technical: a11y, performance, responsive, anti-patterns |
+
+If the reviewed UI contains animations/motion → add `review-animations` as a step (strict craft-bar review, explicit invoke).
 
 ### Full review (user asks for comprehensive/creative evaluation)
 Trigger: "full review", "comprehensive review", "is this good enough?", "ready for launch?", or any review request that implies evaluating creative quality alongside UX/technical.
@@ -86,7 +100,7 @@ Trigger: "full review", "comprehensive review", "is this good enough?", "ready f
 | Image with text / logo / brand | `gpt-image-2` | slide, infographic, social post with copy, branded asset, vertical/9:16, "make a poster with text" |
 | Image, free-form / artistic | `nano-banana` | blog featured image, thumbnail, illustration, pattern, hero photo, mood-board |
 | LEINOS product card | `product-card-image` | product card, packshot, product photo |
-| Banner | `banner-design` | social banner, ad creative, cover image (routes internally to gpt-image-2 or nano-banana) |
+| Banner / ad creative | `gpt-image-2` | social banner, ad creative, cover image (rendered text and brand assets need gpt-image-2 precision) |
 | Presentation (premium) | `design-system` | pitch deck, investor deck, strategic presentation, data-heavy slides |
 | Presentation (quick) | `slides` | simple slides, quick presentation, lightweight deck |
 

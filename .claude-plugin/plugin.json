@@ -1,7 +1,7 @@
 {
   "name": "design-kit",
-  "version": "1.1.1",
-  "description": "Полный набор скиллов для дизайна сайтов: оркестратор + 32 специализированных скилла (стратегия, имплементация, шлифовка, генерация ассетов). v1.1 — gpt-image-2 in, canva out. v1.1.1 — nano-banana description: убран overtrigger 'REQUIRED for all images', добавлены явные negative triggers с deferral на gpt-image-2.",
+  "version": "1.2.0",
+  "description": "Полный набор скиллов для дизайна сайтов: оркестратор + 34 специализированных скилла (стратегия, имплементация, motion, шлифовка, генерация ассетов). v1.2.0 — taste-skill как базовый билдер вместо frontend-design, motion-ось из 4 скиллов вместо animate/overdrive, визуальный скриншот-гейт в critique и polish.",
   "author": {
     "name": "Oleg"
   },
@@ -14,6 +14,7 @@
     "tailwind",
     "shadcn",
     "branding",
+    "motion",
     "creative-director"
   ]
 }

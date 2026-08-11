@@ -20,9 +20,15 @@ The research is clear on this: LLMs are surprisingly good at finding design prob
 
 ## Protocol
 
-### Step 1: Read the Design
+### Step 1: Read the Design — rendered, not just code
 
-Read the component/section/page code. If a screenshot is available, read that too. Understand:
+Read the component/section/page code. Then **look at the actual rendered result** — you cannot judge visual hierarchy, spacing, or first impressions from source code alone:
+
+1. If the project has a running dev server (or one can be started), render the page via Playwright MCP: `browser_navigate` → `browser_take_screenshot`, at least at 390px and 1440px widths.
+2. If a fresh screenshot is already provided, use it.
+3. If rendering is impossible, state explicitly in the verdict that the critique is code-only and lower confidence accordingly.
+
+Understand:
 - What is this section trying to accomplish?
 - Who is the target user?
 - What is the surrounding context (other sections, page flow)?
@@ -110,7 +116,7 @@ FIX_SKILL: [which Tier 3 skill handles this]
 | Layout, spacing, grid, alignment | `arrange` |
 | Too bland, generic, lacks personality | `bolder` |
 | Too aggressive, overwhelming | `quieter` |
-| Animation, transitions needed | `animate` |
+| Animation, transitions needed | `emil-design-eng` |
 | Responsive, mobile breakpoints | `adapt` |
 | Cluttered, too many elements | `distill` |
 | Confusing labels, UX copy | `clarify` |

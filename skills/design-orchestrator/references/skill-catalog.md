@@ -29,10 +29,15 @@
 
 ## Tier 2 — Implementation (HOW to do it)
 
-### frontend-design
-**Purpose:** Creative, distinctive visual code. Bold aesthetics, "wow factor". Avoids generic AI/SaaS look. Prioritizes memorable design over systematic consistency.
-**When:** Building visually striking sections, creative one-offs, landing page heroes, visual experiments.
-**Size:** 4.5KB
+### taste-skill ⭐ (base implementation skill)
+**Purpose:** Anti-slop frontend for landing pages, portfolios, marketing sections, redesigns. Design Read ritual (page kind / vibe words / audience / brand → one-line direction statement), three dials (DESIGN_VARIANCE / MOTION_INTENSITY / VISUAL_DENSITY 1-10) driving every decision, brief→official-design-system matrix (Fluent/Carbon/Polaris/GOV.UK…), named bans on AI-tell palettes/fonts/patterns, redesign protocol (Greenfield/Preserve/Overhaul), copy self-audit.
+**When:** Default builder for any product/site section: new sections, landing pages, redesigns, marketing pages.
+**Frontmatter name:** `design-taste-frontend` (invoke directory skill `taste-skill`).
+**Key rule:** ONE base skill per task — never run together with `frontend-design` on the same task.
+
+### frontend-design (name-only; one-off artifacts)
+**Purpose:** Creative, distinctive visual code for one-off pieces. Bold aesthetics, "wow factor".
+**When:** ONLY for standalone HTML artifacts, posters, one-pagers, visual experiments outside a product codebase. For product/site work use `taste-skill`.
 **Key rule:** Choose extreme aesthetic direction and execute with precision. Never default to Inter/Roboto/purple gradients.
 
 ### ui-styling
@@ -65,14 +70,33 @@
 **Key scripts:** `generate-tokens.cjs` (JSON → CSS), `validate-tokens.cjs` (find hardcoded values), `search-slides.py` (BM25 contextual slide search)
 **Note:** For presentations, `design-system` is the premium engine; `slides` is the lightweight fallback.
 
-### teach-impeccable
-**Purpose:** One-time setup — creates `.impeccable.md` with project's design context (colors, fonts, brand, style direction).
-**When:** First time using any Impeccable skill in a project. Must exist before Tier 3 skills can work effectively.
-**Run once per project.**
+---
+
+## Motion — animation decisions and review
+
+> Removed skills `animate` and `overdrive` are archived (`~/.claude/skill-backups/removed-20260711/`); this axis replaces them.
+
+### emil-design-eng
+**Purpose:** Emil Kowalski's design engineering philosophy — Animation Decision Framework: (1) should this animate at all (frequency table: 100+/day → never), (2) what's the goal, (3) which easing (enter/exit → ease-out; on-screen movement → ease-in-out; ease-in for UI — never), (4) duration (UI <300ms). Custom cubic-bezier tokens, Before/After/Why review format, taste principles for invisible details.
+**When:** Adding or deciding on any animation, transition, hover/scroll effect, micro-interaction; UI polish judgment calls.
+
+### review-animations
+**Purpose:** Strict animation code review against 10 non-negotiable standards (justified motion, ease-out on enter/exit, <300ms, transform-origin, GPU-only properties, prefers-reduced-motion). Default to flagging; approval is earned.
+**When:** Reviewing existing animation/motion code. Explicit invoke only (`disable-model-invocation: true`).
+
+### apple-design
+**Purpose:** Apple HIG/WWDC principles for the web — spring physics, interruptible transitions, gesture-driven UI (drag/swipe/sheets), translucent materials, optical typography, reduced-motion.
+**When:** Gesture-driven UI, spring animations, Apple-style fluid interfaces, ambitious motion work (replaces old `overdrive`).
+
+### animation-vocabulary
+**Purpose:** Reverse-lookup glossary: vague description of a motion effect → its exact term ("bouncy popover thing" → Pop in).
+**When:** Naming an effect to prompt AI/designers precisely. Not for building.
 
 ---
 
 ## Tier 3 — Refinement (SHARPEN specific aspect)
+
+> Most Tier-3 skills are `name-only` in the global listing (no description in context). They remain fully invocable by exact name via the Skill tool — this catalog is their source of truth.
 
 ### polish
 **Purpose:** Final refinement pass — alignment, spacing consistency, hover/focus/active/disabled states, transitions, overflow, border-radius, shadows. The "last 5%" before shipping. Never changes design decisions — only sharpens execution.
@@ -103,12 +127,6 @@
 ### quieter
 **Purpose:** Tone down aggressive or overstimulating designs. Reduces intensity while preserving quality.
 **When:** Too bold, too loud, overwhelming, aggressive, garish, needs calming down.
-
-### animate
-**Purpose:** Purposeful animations — hover/active/focus transitions, entry animations, state changes, loading states. Transform+opacity only (GPU-composited). Always respects prefers-reduced-motion.
-**When:** Adding transitions, hover effects, scroll animations, motion design, loading states, "feels static".
-**Invoke via:** `Skill tool` — has full SKILL.md with timing reference table, common fix patterns, stagger rules, performance principles.
-**Pairs with:** `optimize` (check performance after adding animations)
 
 ### optimize
 **Purpose:** Diagnose and fix UI performance — loading speed, rendering, animations, images, bundle size.
@@ -148,11 +166,6 @@
 **Purpose:** Onboarding flows, empty states, first-run experiences. Help users reach value quickly.
 **When:** New user experience, empty state design, activation flow, getting-started screens.
 
-### overdrive
-**Purpose:** Technically ambitious — shaders, spring physics, scroll-driven reveals, 60fps animations.
-**When:** Want to wow/impress, go all-out, something extraordinary. High technical ambition.
-**Warning:** Heavy — use only when the "wow" justifies the complexity.
-
 ---
 
 ## Tier 4 — Asset Generation
@@ -188,11 +201,6 @@
 ### product-card-image
 **Purpose:** LEINOS-specific product card composites. 3-step compositing pipeline (ImageMagick + Gemini). 4:3 aspect ratio, 800px WebP.
 **When:** Creating product photos/cards for LEINOS website specifically.
-
-### banner-design
-**Purpose:** Banners for social media, ads, web, print. 22 art direction styles across all platforms.
-**When:** Facebook/Instagram/LinkedIn/YouTube banners, ad creatives, cover images, web heroes.
-**Engine:** Routes internally to `gpt-image-2` (if text in banner) or `nano-banana` (if purely visual).
 
 ### slides
 **Purpose:** Strategic HTML presentations with Chart.js data visualization, design tokens, responsive layouts.

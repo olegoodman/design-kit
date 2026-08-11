@@ -75,10 +75,17 @@ def main():
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
     img = res.data[0]
-    if not img.b64_json:
-        print("⚠️  proxy returned URL instead of b64_json — fetch not implemented", file=sys.stderr)
+    if img.b64_json:
+        data = base64.b64decode(img.b64_json)
+    elif getattr(img, "url", None):
+        import urllib.request
+        req = urllib.request.Request(img.url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req) as r:
+            data = r.read()
+    else:
+        print("⚠️  proxy returned neither b64_json nor url", file=sys.stderr)
         sys.exit(3)
-    out.write_bytes(base64.b64decode(img.b64_json))
+    out.write_bytes(data)
     print(f"✅ {out}")
 
 
